@@ -14,7 +14,7 @@ public class StringCalculator
             numbers = numbers.Substring(2);
         }
 
-        var numArray = numbers.Split(delimiters).Select(int.Parse);
+        var numArray = numbers.Split(delimiters).Select(int.Parse).Where(x => x <= 1000);
         var negativeNumbers = numArray.Where(x => x < 0);
         if (negativeNumbers.Count() > 0) {
             string message = "Negatives not allowed: ";

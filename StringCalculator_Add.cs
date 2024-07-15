@@ -87,4 +87,17 @@ public class StringCalculator_Add
         var ex = Assert.Throws<Exception>(actual);
         Assert.Equal(expectedResult, ex.Message);
     }
+
+    [Theory]
+    [InlineData("1000", 1000)]
+    [InlineData("1001", 0)]
+    [InlineData("1,1001", 1)]
+    public void Add_NumbersAbove1000_ReturnsSumExcludingNumbersAbove1000(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }
 }
