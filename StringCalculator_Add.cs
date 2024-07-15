@@ -112,4 +112,17 @@ public class StringCalculator_Add
 
         Assert.Equal(expectedResult, result);
     }
+
+    [Theory]
+    [InlineData("//[*][%]\n1*2%3", 6)]
+    [InlineData("//[*][%]\n1*2%3,4\n5", 15)]
+    [InlineData("//[*][%][;]\n1*2%3,4\n5;6", 21)]
+    public void Add_MultipleDelimiters_ReturnsSum(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }
 }

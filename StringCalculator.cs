@@ -22,15 +22,9 @@ public class StringCalculator
         string[] result = new string[] { ",", "\n" };
         if (numbers.Contains("//"))
         {
-            if (numbers.Contains('['))
-            {
-                var customDelimiter = numbers[3..numbers.IndexOf(']')];
-                result = result.Concat(new string[] { customDelimiter }).ToArray();
-            }
-            else
-            {
-                result = result.Concat(new string[] { numbers[2].ToString() }).ToArray();
-            }
+            var delimiterString = numbers[..numbers.IndexOf('\n')];
+            delimiterString = delimiterString.TrimStart('/','[').TrimEnd(']');
+            result = result.Concat(delimiterString.Split("][")).ToArray();
         }
         return result;
     }
