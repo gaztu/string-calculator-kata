@@ -37,4 +37,16 @@ public class StringCalculator_Add
 
         Assert.Equal(expectedResult, result);
     }
+
+    [Theory]
+    [InlineData("1,2,3", 6)]
+    [InlineData("2,4,6,8,9,7,5,3,1", 45)]
+    public void Add_ManyNumbers_ReturnsSum(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }
 }
