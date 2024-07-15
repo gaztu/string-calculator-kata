@@ -14,4 +14,16 @@ public class StringCalculator_Add
         // Assert
         Assert.Equal(0, result);
     }
+
+    [Theory]
+    [InlineData("1", 1)]
+    [InlineData("2", 2)]
+    public void Add_SingleNumber_ReturnsNumber(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }    
 }
