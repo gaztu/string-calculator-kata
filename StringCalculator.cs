@@ -6,7 +6,7 @@ public class StringCalculator
     {
         if (String.IsNullOrEmpty(numbers)) return 0;
 
-        var result = numbers.Split(',').Sum(x => int.Parse(x));
+        var result = numbers.Split(',','\n').Sum(x => int.Parse(x));
         return result;
     }
 }

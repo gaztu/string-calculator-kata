@@ -49,4 +49,16 @@ public class StringCalculator_Add
 
         Assert.Equal(expectedResult, result);
     }
+
+    [Theory]
+    [InlineData("1\n2,3", 6)]
+    [InlineData("2,4\n6", 12)]
+    public void Add_StringWithNewlineChar_ReturnsSum(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }
 }
