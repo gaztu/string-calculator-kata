@@ -14,7 +14,18 @@ public class StringCalculator
             numbers = numbers.Substring(2);
         }
 
-        var result = numbers.Split(delimiters).Sum(x => int.Parse(x));
-        return result;
+        var numArray = numbers.Split(delimiters).Select(int.Parse);
+        var negativeNumbers = numArray.Where(x => x < 0);
+        if (negativeNumbers.Count() > 0) {
+            string message = "Negatives not allowed: ";
+            foreach(int num in negativeNumbers)
+            {
+                message += num.ToString() + ",";
+            }
+            message = message.TrimEnd(',');
+            throw new Exception(message);
+        }
+
+        return numArray.Sum();;
     }
 }

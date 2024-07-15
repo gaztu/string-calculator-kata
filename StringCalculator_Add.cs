@@ -73,4 +73,18 @@ public class StringCalculator_Add
 
         Assert.Equal(expectedResult, result);
     }
+
+    [Theory]
+    [InlineData("-1", "Negatives not allowed: -1")]
+    [InlineData("-1,-2", "Negatives not allowed: -1,-2")]
+    [InlineData("-1,3,-2", "Negatives not allowed: -1,-2")]
+    public void Add_NegativeNumbers_ReturnsException(string numbers, string expectedResult)
+    {
+        StringCalculator calc = new();
+
+        Action actual = () => calc.Add(numbers);
+
+        var ex = Assert.Throws<Exception>(actual);
+        Assert.Equal(expectedResult, ex.Message);
+    }
 }
