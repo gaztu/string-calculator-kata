@@ -100,4 +100,16 @@ public class StringCalculator_Add
 
         Assert.Equal(expectedResult, result);
     }
+
+    [Theory]
+    [InlineData("//[***]\n1***2***3", 6)]
+    [InlineData("//[******]\n1******2******3", 6)]
+    public void Add_DelimiterOfAnyLength_ReturnsSum(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }
 }

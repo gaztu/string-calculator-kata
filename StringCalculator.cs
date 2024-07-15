@@ -6,17 +6,24 @@ public class StringCalculator
     {
         if (String.IsNullOrEmpty(numbers)) return 0;
 
-        char[] delimiters = new char[] {',', '\n'};
+        string[] delimiters = new string[] {",", "\n"};
         if (numbers.Contains("//"))
         {
             numbers = numbers.TrimStart('/');
-            delimiters = delimiters.Concat(new char[] { numbers[0] }).ToArray();
-            numbers = numbers.Substring(2);
+            if (numbers.Contains('['))
+            {
+                var customDelimiter = numbers.Substring(1, numbers.IndexOf(']') - 1);
+                delimiters = delimiters.Concat(new string[] { customDelimiter }).ToArray();
+                numbers = numbers.Substring(customDelimiter.Length + 3);
+            } else {
+                delimiters = delimiters.Concat(new string[] { numbers[0].ToString() }).ToArray();
+                numbers = numbers[2..];
+            }
         }
 
-        var numArray = numbers.Split(delimiters).Select(int.Parse).Where(x => x <= 1000);
+        var numArray = numbers.Split(delimiters, StringSplitOptions.None).Select(int.Parse).Where(x => x <= 1000);
         var negativeNumbers = numArray.Where(x => x < 0);
-        if (negativeNumbers.Count() > 0) {
+        if (negativeNumbers.Any()) {
             string message = "Negatives not allowed: ";
             foreach(int num in negativeNumbers)
             {
