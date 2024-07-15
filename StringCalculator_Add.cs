@@ -25,5 +25,16 @@ public class StringCalculator_Add
         var result = calc.Add(numbers);
 
         Assert.Equal(expectedResult, result);
-    }    
+    }
+
+    [Theory]
+    [InlineData("1,2", 3)]
+    public void Add_TwoNumbers_ReturnsSum(string numbers, int expectedResult)
+    {
+        StringCalculator calc = new();
+        
+        var result = calc.Add(numbers);
+
+        Assert.Equal(expectedResult, result);
+    }
 }

@@ -6,6 +6,12 @@ public class StringCalculator
     {
         if (String.IsNullOrEmpty(numbers)) return 0;
 
-        return Int32.Parse(numbers);
+        var numbersArray = numbers.Split(',');
+        var result = 0;
+        foreach (var number in numbersArray)
+        {
+            result += Int32.Parse(number);
+        }
+        return result;
     }
 }
